@@ -51,7 +51,7 @@ class GoodreadsSpider(scrapy.Spider):
         quotes = response.css('div.quoteDetails')
         
         for quote in quotes:
-            text = "".join(quote.css('div.quoteText::text').getall())
+            text = "\n".join(quote.css('div.quoteText::text').getall())
             tags = quote.css('div.quoteFooter > div.left > a::text').getall()
             likes = quote.css('div.quoteFooter > div.right >a::text').get()
             quotes_list.append({
