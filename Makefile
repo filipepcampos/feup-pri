@@ -38,8 +38,10 @@ collect:
 		pip install -r requirements.txt; \
 		scrapy crawl goodreads \
 			-a base_url=$(BASE_URL) -a books_page_count=$(N_BOOK_PAGES) -a quotes_page_count=$(N_QUOTE_PAGES) \
-			-o ../data/goodreads_test.json; \
+			-o ../data/goodreads.json; \
 		deactivate
+
+data/goodreads.json: collect
 
 process: data/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py
 	# This target is reserved for data processing, which typically includes
