@@ -23,5 +23,8 @@ class BookItem(scrapy.Item):
         input_processor = MapCompose(lambda s : s.strip()),
         output_processor = TakeFirst()
     )
+    url = scrapy.Field(
+        output_processor = TakeFirst()
+    )
     genres = scrapy.Field()
     quotes = scrapy.Field()

@@ -30,6 +30,7 @@ class GoodreadsSpider(scrapy.Spider):
             genres = response.css('span.BookPageMetadataSection__genreButton > a > span::text').getall()
             loader.add_value('genres', genres)
             loader.add_value('pageCount', response.css('p[data-testid="pagesFormat"]::text').get().split(',')[0])
+            loader.add_value('url', response.url)
 
             yield response.follow(quote_link, meta={'book_loader': loader, 'quotes_list': [], 'n_page': 1}, callback=self.parse_quotes)
         else:
@@ -44,6 +45,7 @@ class GoodreadsSpider(scrapy.Spider):
 
             genres = response.css('a.bookPageGenreLink::text').getall()
             loader.add_value('genres', list(dict.fromkeys(genres)))
+            loader.add_value('url', response.url)
             yield response.follow(quote_link, meta={'book_loader': loader, 'quotes_list': [], 'n_page': 1}, callback=self.parse_quotes)
     
     def parse_quotes(self, response):
