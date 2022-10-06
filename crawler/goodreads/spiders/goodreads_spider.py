@@ -18,8 +18,10 @@ class GoodreadsSpider(scrapy.Spider):
         loader = ItemLoader(BookItem(), response=response)
         title = response.css('#bookTitle::text').get()
         
+        # The book page has two distinct HTML templates that can be served by the server due to an ongoing website change
+        # They include completly different selectors, therefore we need to differentiate and handle each format differently
         if title == None:
-            #fmt 1 ('normal' one)
+            # First template
             quote_link = response.css('a.DiscussionCard::attr(href)').get()
             loader.add_css('title', 'h1.Text__title1::text', TakeFirst())
             loader.add_css('author', 'span.ContributorLink__name::text', TakeFirst())
@@ -31,7 +33,7 @@ class GoodreadsSpider(scrapy.Spider):
 
             yield response.follow(quote_link, meta={'book_loader': loader, 'quotes_list': [], 'n_page': 1}, callback=self.parse_quotes)
         else:
-            #fmt 2
+            # Second template
             quote_link = response.xpath("//a[re:test(.//text(), 'quotes from', 'i')]/@href").get()
 
             loader.add_value('title', title)
