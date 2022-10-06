@@ -1,5 +1,19 @@
 SHELL := /bin/bash
 
+#####################
+# Variables section #
+#####################
+
+# Base url used for crawling
+BASE_URL := "https://www.goodreads.com/list/show/1.Best_Books_Ever?page="
+# Number of pages that should be crawled
+N_BOOK_PAGES := 100
+# Number of quotes pages that should be crawler per book
+N_QUOTE_PAGES := 10
+
+#################
+# Rules section #
+#################
 all: clean process analyze
 
 # Cleans everything, including the original data
@@ -22,7 +36,9 @@ collect:
 		python3 -m venv venv; \
 		source venv/bin/activate; \
 		pip install -r requirements.txt; \
-		scrapy crawl goodreads -o ../data/goodreads_test.json; \
+		scrapy crawl goodreads \
+			-a base_url=$(BASE_URL) -a books_page_count=$(N_BOOK_PAGES) -a quotes_page_count=$(N_QUOTE_PAGES) \
+			-o ../data/goodreads_test.json; \
 		deactivate
 
 process: data/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py

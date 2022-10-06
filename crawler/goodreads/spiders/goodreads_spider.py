@@ -3,13 +3,12 @@ from scrapy.loader import ItemLoader
 from itemloaders.processors import TakeFirst
 from goodreads.items import BookItem
 
-BASE_URL = 'https://www.goodreads.com/list/show/1.Best_Books_Ever?page='
-N_PAGES = 2
-N_QUOTE_PAGES = 3
-
 class GoodreadsSpider(scrapy.Spider):
     name = "goodreads"
-    start_urls = list(BASE_URL+str(i+1) for i in range(N_PAGES))
+
+    def __init__(self, base_url, books_page_count, quotes_page_count):
+        self.start_urls = list(base_url+str(i+1) for i in range(int(books_page_count)))
+        self.quotes_page_count = int(quotes_page_count)
 
     def parse(self, response):
         book_links = response.css('a.bookTitle::attr(href)').getall()
@@ -63,7 +62,7 @@ class GoodreadsSpider(scrapy.Spider):
 
         loader = response.meta['book_loader']
         next_page_href = response.css('a.next_page::attr(href)').get()
-        if response.meta['n_page'] >= N_QUOTE_PAGES or not next_page_href:
+        if response.meta['n_page'] >= self.quotes_page_count or not next_page_href:
             loader.add_value('quotes', quotes_list)
             yield loader.load_item()
         else:
