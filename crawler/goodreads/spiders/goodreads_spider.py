@@ -1,4 +1,3 @@
-from gc import callbacks
 import scrapy
 from scrapy.loader import ItemLoader
 from itemloaders.processors import TakeFirst
