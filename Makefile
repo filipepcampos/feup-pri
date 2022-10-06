@@ -41,8 +41,6 @@ collect:
 			-o ../data/goodreads.json; \
 		deactivate
 
-data/goodreads.json: collect
-
 process: data/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py
 	# This target is reserved for data processing, which typically includes
 	# cleaning and refinement.
@@ -66,7 +64,12 @@ analyze:
 	# Once again, it is recommended to separate different types of analysis between scripts,
 	# which may span several languages. Diversity is key here so data can be better understood.
 
-	echo "Not implemented"
+	$(eval BOOK_COUNT=$(shell cat processed/goodreads.json | jq '. | length'))
+	$(eval TOTAL_QUOTE_COUNT=$(shell cat processed/goodreads.json | jq '[.[] | {quote: .quotes} | .[] | length] | add'))
+
+	@echo "Data information:"
+	@echo "  - Book Count: $(BOOK_COUNT)"
+	@echo "  - Total Quote Count: $(TOTAL_QUOTE_COUNT)"
 
 adhoc:
 	# This target is not part of the overall automation, but it can be useful to have something similar
