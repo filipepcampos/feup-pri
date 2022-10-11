@@ -53,13 +53,16 @@ process: data/goodreads.json data-processing/convert_isbn.py data-processing/for
 	
 	python3 -m venv data-processing/venv
 
-	cat data/goodreads.json | \
+	source data-processing/venv/bin/activate; \
+		pip install -r data-processing/requirements.txt --quiet; \
+		cat data/goodreads.json | \
 		python3 data-processing/convert_isbn.py | \
 		python3 data-processing/format_pages.py | \
 		python3 data-processing/format_quote_likes.py | \
 		python3 data-processing/remove_quoteless_books.py | \
 		python3 data-processing/strip_quotes.py | \
-		python3 data-processing/fill_missing_fields.py \
+		python3 data-processing/fill_missing_fields.py | \
+		python3 data-processing/identify_language.py \
 		> processed/goodreads.json
 
 analyze:

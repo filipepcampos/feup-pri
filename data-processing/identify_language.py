@@ -13,20 +13,21 @@ nlp = spacy.load("en_core_web_sm")
 Language.factory("language_detector", func=get_lang_detector)
 nlp.add_pipe('language_detector', last=True)
 
+def gen_quote_text(json):
+    if 'quotes' in json:
+        for quote in json['quotes']:
+            yield (quote['text'], quote) # (text that will be used by nlp, context)
+
 """
 For each quote, identify the language it's written in
 """
 def identify_language(json):
-    if 'quotes' in json:
-        for quote in json['quotes']:
-            doc = nlp(quote['text'])
-            quote['language'] = doc._.language
+    for doc, quote in nlp.pipe(gen_quote_text(json), disable=["tok2vec", "tagger", "attribute_ruler", "ner", "senter", "lemmatizer"], as_tuples=True):
+        quote['language'] = doc._.language
     return json
 
 def main():
-    #process_json(identify_language)
-    x = nlp("Je me apelle")
-    print(x._.language)
+    process_json(identify_language)
 
 if __name__ == '__main__':
     main()
