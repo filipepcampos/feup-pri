@@ -122,6 +122,8 @@ def main():
     
     plt.clf()
     sns.lineplot(data=df, x='rating', y='avgQuoteLikes', estimator=np.median)
+    plt.ylabel('Average Quote Likes')
+    plt.xlabel('Rating')
     plt.tight_layout()
     savefig('avgQuoteLikes_over_rating.png')
 
