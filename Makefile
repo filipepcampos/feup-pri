@@ -76,8 +76,7 @@ analyze:
 
 	source data-characterization/venv/bin/activate; \
 		pip install -r data-characterization/requirements.txt --quiet; \
-		python3 data-characterization/main.py -i processed/goodreads.json -o data-characterization/output; \ 
-		python3 data-characterization/nlp.py -i processed/goodreads.json -o data-characterization/output
+		python3 data-characterization/main.py -i processed/goodreads.json -o data-characterization/output
 
 adhoc:
 	# This target is not part of the overall automation, but it can be useful to have something similar
