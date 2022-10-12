@@ -54,7 +54,10 @@ collect:
 			-o ../$(DATA_OUTPUT_FOLDER)/goodreads.json; \
 		deactivate
 
-process: data/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py
+
+$(DATA_FOLDER)/goodreads.json: collect
+
+process: $(DATA_FOLDER)/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py
 	# This target is reserved for data processing, which typically includes
 	# cleaning and refinement.
 	# As best practice, have multiple scripts to perform different (sub)steps
