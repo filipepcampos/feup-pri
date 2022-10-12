@@ -70,12 +70,14 @@ analyze:
 	# Once again, it is recommended to separate different types of analysis between scripts,
 	# which may span several languages. Diversity is key here so data can be better understood.
 
-	$(eval BOOK_COUNT=$(shell cat processed/goodreads.json | jq '. | length'))
-	$(eval TOTAL_QUOTE_COUNT=$(shell cat processed/goodreads.json | jq '[.[] | {quote: .quotes} | .[] | length] | add'))
+	mkdir data-characterization/output -p
 
-	@echo "Data information:"
-	@echo "  - Book Count: $(BOOK_COUNT)"
-	@echo "  - Total Quote Count: $(TOTAL_QUOTE_COUNT)"
+	python3 -m venv data-characterization/venv
+
+	source data-characterization/venv/bin/activate; \
+		pip install -r data-characterization/requirements.txt --quiet; \
+		python3 data-characterization/main.py -i processed/goodreads.json -o data-characterization/output; \ 
+		python3 data-characterization/nlp.py -i processed/goodreads.json -o data-characterization/output
 
 adhoc:
 	# This target is not part of the overall automation, but it can be useful to have something similar
