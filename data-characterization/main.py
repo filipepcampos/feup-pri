@@ -34,6 +34,7 @@ def get_genre_df(df):
 def get_tag_df(quote_df):
     tag_df = pd.DataFrame(pd.Series(tag for tags_list in quote_df['tags'] for tag in tags_list).value_counts()).rename(columns={0: 'count'})
     tag_df = tag_df.reset_index().rename(columns={'index': 'tag'})
+    return tag_df
 
 def get_author_df(df):
     author_df = df.groupby(['author']) \
@@ -44,7 +45,7 @@ def get_author_df(df):
     return author_df
 
 def main():
-    ## Setup 
+    sns.set_style('whitegrid')
 
     df = pd.read_json(input_file)
     df['nQuotes'] = df['quotes'].apply(lambda x: len(x))
@@ -76,8 +77,10 @@ def main():
     plt.xlabel('Rating')
     plt.savefig(f'{output_folder}/rating_distribution.png')
 
+    plt.clf()
     sns.boxplot(author_df.rename(columns={'nBooks': 'Book Count', 'avgRating': 'Average Rating'}), showfliers=False)
     plt.ylabel('Number of books')
+    plt.ylim(0, 5)
     plt.tight_layout()
     savefig('book_rating_distribution.png')
 
@@ -88,6 +91,7 @@ def main():
     plt.tight_layout()
     savefig('genre_count.png')
 
+    plt.clf()
     sns.barplot(data=tag_df.reset_index().head(15), x='tag', y='count')
     plt.xticks(rotation = 90)
     plt.xlabel('Tag')
