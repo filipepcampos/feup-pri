@@ -4,6 +4,7 @@ from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 def get_parser():
     parser = argparse.ArgumentParser()
@@ -91,6 +92,7 @@ def main():
     plt.tight_layout()
     savefig('genre_count.png')
 
+
     plt.clf()
     sns.barplot(data=tag_df.reset_index().head(15), x='tag', y='count')
     plt.xticks(rotation = 90)
@@ -99,13 +101,29 @@ def main():
     plt.tight_layout()
     savefig('tag_count.png')
 
+    plt.clf()
     sns.displot(data=genre_df, x='count', kind='hist')
-    savefig('genre_count.png')
+    savefig('complete_genre_count.png')
 
+    plt.clf()
     sns.lmplot(data=author_df, x='nBooks', y='avgRating')
     plt.ylabel('Average rating')
     plt.xlabel('Number of books')
     savefig('n_books_over_avgrating.png')
+
+    def f(quotes):
+        total, n = 0, 0
+        for quote in quotes:
+            total += int(quote['likes'])
+            n += 1
+        return total/n
+    df['avgQuoteLikes'] = df['quotes'].apply(f)
+    
+    plt.clf()
+    sns.lineplot(data=df, x='rating', y='avgQuoteLikes', estimator=np.median)
+    plt.tight_layout()
+    savefig('avgQuoteLikes_over_rating.png')
+
 
 if __name__ == '__main__':
     main()
