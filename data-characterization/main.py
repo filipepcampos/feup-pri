@@ -85,6 +85,7 @@ def main():
     plt.tight_layout()
     savefig('book_rating_distribution.png')
 
+    plt.clf()
     sns.barplot(data=genre_df.reset_index().head(15), x='genre', y='count')
     plt.xticks(rotation = 90)
     plt.xlabel('Genre')
