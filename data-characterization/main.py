@@ -106,7 +106,7 @@ def main():
     savefig('complete_genre_count.png')
 
     plt.clf()
-    sns.lmplot(data=author_df, x='nBooks', y='avgRating')
+    sns.lmplot(data=author_df, x='nBooks', y='avgRating', scatter_kws={'alpha':0.5, 's':0.8})
     plt.ylabel('Average rating')
     plt.xlabel('Number of books')
     savefig('n_books_over_avgrating.png')
