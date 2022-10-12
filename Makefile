@@ -13,7 +13,8 @@ N_QUOTE_PAGES := 50
 
 # Flag identifying if the language of each quote should be identifed and analysed
 # This is a computationally expensive step, therefore is presented as an option
-IDENTIFY_QUOTE_LANGUAGE := 0
+# 1 = Active, 0 = Inactive
+IDENTIFY_QUOTE_LANGUAGE := 1
 
 # Crawler output folder
 DATA_OUTPUT_FOLDER := data
