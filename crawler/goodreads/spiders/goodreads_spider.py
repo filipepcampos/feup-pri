@@ -48,7 +48,10 @@ class GoodreadsSpider(scrapy.Spider):
             genres = response.css('a.bookPageGenreLink::text').getall()
             loader.add_value('genres', list(dict.fromkeys(genres)))
             loader.add_value('url', response.url)
-            yield response.follow(quote_link, meta={'book_loader': loader, 'quotes_list': [], 'n_page': 1}, callback=self.parse_quotes)
+            if quote_link:
+                yield response.follow(quote_link, meta={'book_loader': loader, 'quotes_list': [], 'n_page': 1}, callback=self.parse_quotes)
+            else:
+                yield loader.load_item()
     
     def parse_quotes(self, response):
         quotes_list = response.meta['quotes_list']
