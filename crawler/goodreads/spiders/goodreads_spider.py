@@ -1,6 +1,6 @@
 import scrapy
 from scrapy.loader import ItemLoader
-from itemloaders.processors import TakeFirst
+from itemloaders.processors import TakeFirst, Join
 from goodreads.items import BookItem
 
 class GoodreadsSpider(scrapy.Spider):
@@ -38,10 +38,12 @@ class GoodreadsSpider(scrapy.Spider):
             quote_link = response.xpath("//a[re:test(.//text(), 'quotes from', 'i')]/@href").get()
 
             loader.add_value('title', title)
-            loader.add_css('author', 'a.authorName > span::text', TakeFirst())
+            authors = response.css('a.authorName > span::text').getall()
+            loader.add_value('authors', authors)
             loader.add_css('rating', 'span[itemprop="ratingValue"]::text')
             loader.add_css('pageCount', 'span[itemprop="numberOfPages"]::text')
             loader.add_xpath('ISBN', '//div[@class="infoBoxRowTitle"][text()="ISBN"]/following-sibling::div/text()', TakeFirst())
+            loader.add_css('description', 'div#description > span[style*="display:none"]::text', Join('\n\n'))
 
             genres = response.css('a.bookPageGenreLink::text').getall()
             loader.add_value('genres', list(dict.fromkeys(genres)))
