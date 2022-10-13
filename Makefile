@@ -97,12 +97,12 @@ analyze:
 ifeq ($(IDENTIFY_QUOTE_LANGUAGE), 1)
 	source data-characterization/venv/bin/activate; \
 		pip install -r data-characterization/requirements.txt --quiet; \
-		python3 data-characterization/main.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER);  \
+		python3 data-characterization/analyze.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER);  \
 		python3 data-characterization/language.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER)
 else
 	source data-characterization/venv/bin/activate; \
 		pip install -r data-characterization/requirements.txt --quiet; \
-		python3 data-characterization/main.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER)
+		python3 data-characterization/analyze.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER)
 endif
 
 adhoc:
