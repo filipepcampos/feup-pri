@@ -24,7 +24,6 @@ def convert_isbn(json):
     return json
 
 def main():
-    #print(convert_isbn({"ISBN": "BO7FRW1CKJ"}))
     process_json(convert_isbn)
 
 if __name__ == '__main__':
