@@ -39,7 +39,7 @@ clean:
 	rm -rf $(PROCESS_OUTPUT_FOLDER) $(ANALYSIS_OUTPUT_FOLDER)
 
 .PHONY: collect process analyze adhoc
-collect:
+collect $(DATA_OUTPUT_FOLDER)/goodreads.json:
 	# This target is usually associated with data collection
 	# This can involved scraping websites, downloading files from servers,
 	# or other similar operations.
@@ -55,10 +55,7 @@ collect:
 			-o ../$(DATA_OUTPUT_FOLDER)/goodreads.json; \
 		deactivate
 
-
-$(DATA_FOLDER)/goodreads.json: collect
-
-process: $(DATA_FOLDER)/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py
+process: $(DATA_OUTPUT_FOLDER)/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py
 	# This target is reserved for data processing, which typically includes
 	# cleaning and refinement.
 	# As best practice, have multiple scripts to perform different (sub)steps
