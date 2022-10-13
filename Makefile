@@ -66,7 +66,6 @@ process: $(DATA_OUTPUT_FOLDER)/goodreads.json data-processing/convert_isbn.py da
 	mkdir -p $(PROCESS_OUTPUT_FOLDER)
 
 	cat $(DATA_OUTPUT_FOLDER)/goodreads.json | \
-		python3 data-processing/convert_isbn.py | \
 		python3 data-processing/format_pages.py | \
 		python3 data-processing/format_quote_likes.py | \
 		python3 data-processing/remove_quoteless_books.py | \
@@ -98,10 +97,11 @@ ifeq ($(IDENTIFY_QUOTE_LANGUAGE), 1)
 		pip install -r data-characterization/requirements.txt --quiet; \
 		python3 data-characterization/main.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER);  \
 		python3 data-characterization/language.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER)
-endif
+else
 	source data-characterization/venv/bin/activate; \
 		pip install -r data-characterization/requirements.txt --quiet; \
 		python3 data-characterization/main.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER)
+endif
 
 adhoc:
 	# This target is not part of the overall automation, but it can be useful to have something similar
