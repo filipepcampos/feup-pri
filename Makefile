@@ -40,10 +40,8 @@ clean:
 
 .PHONY: collect process analyze adhoc
 collect $(DATA_OUTPUT_FOLDER)/goodreads.json:
-	# This target is usually associated with data collection
-	# This can involved scraping websites, downloading files from servers,
-	# or other similar operations.
-	# As best practice, ensure that all output data goes to a known location (e.g., here, data/)
+	# This target will execute our webcrawler and export the resulting data to $(DATA_OUTPUT_FOLDER)/goodreads.json
+	# An python virtual environment is used to keep the project pip dependencies contained
 	
 	mkdir -p $(DATA_OUTPUT_FOLDER)
 	cd crawler; \
@@ -56,12 +54,7 @@ collect $(DATA_OUTPUT_FOLDER)/goodreads.json:
 		deactivate
 
 process: $(DATA_OUTPUT_FOLDER)/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py
-	# This target is reserved for data processing, which typically includes
-	# cleaning and refinement.
-	# As best practice, have multiple scripts to perform different (sub)steps
-	# You may even opt for several targets for bigger granularity
-	# (e.g., a process_cleaning and a process_refinement target)
-	# Moreover, ensure that data also goes to a known location for easier analysis
+	# Apply data processing steps using some small python scripts
 	
 	mkdir -p $(PROCESS_OUTPUT_FOLDER)
 
@@ -73,6 +66,9 @@ process: $(DATA_OUTPUT_FOLDER)/goodreads.json data-processing/convert_isbn.py da
 		python3 data-processing/strip_quotes.py | \
 		python3 data-processing/fill_missing_fields.py \
 		> $(PROCESS_OUTPUT_FOLDER)/goodreads.json
+
+	# The language identification step is time consuming, due to the large amount of quotes that need to be considered
+	# This step is optional for now to save time
 	
 ifeq ($(IDENTIFY_QUOTE_LANGUAGE), 1)
 	mv $(PROCESS_OUTPUT_FOLDER)/goodreads.json $(PROCESS_OUTPUT_FOLDER)/goodreads_nolanguage.json
@@ -86,9 +82,7 @@ ifeq ($(IDENTIFY_QUOTE_LANGUAGE), 1)
 endif
 
 analyze:
-	# This target is recommended to isolate all data analysis scripts.
-	# Once again, it is recommended to separate different types of analysis between scripts,
-	# which may span several languages. Diversity is key here so data can be better understood.
+	# Analyse the data that was obtained from the process step
 
 	mkdir -p $(ANALYSIS_OUTPUT_FOLDER)
 
