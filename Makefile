@@ -14,7 +14,7 @@ N_QUOTE_PAGES := 50
 # Flag identifying if the language of each quote should be identifed and analysed
 # This is a computationally expensive step, therefore is presented as an option
 # 1 = Active, 0 = Inactive
-IDENTIFY_QUOTE_LANGUAGE := 1
+IDENTIFY_QUOTE_LANGUAGE := 0
 
 # Crawler output folder
 DATA_OUTPUT_FOLDER := data
@@ -66,6 +66,7 @@ process: $(DATA_OUTPUT_FOLDER)/goodreads.json data-processing/convert_isbn.py da
 	mkdir -p $(PROCESS_OUTPUT_FOLDER)
 
 	cat $(DATA_OUTPUT_FOLDER)/goodreads.json | \
+		python3 data-processing/convert_isbn.py | \
 		python3 data-processing/format_pages.py | \
 		python3 data-processing/format_quote_likes.py | \
 		python3 data-processing/remove_quoteless_books.py | \
