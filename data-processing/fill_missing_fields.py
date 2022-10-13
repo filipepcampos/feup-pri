@@ -6,12 +6,13 @@ Fill missing attributes according to book_attributes and quote_attributes defaul
 
 book_attributes = {
     'title': None,
-    'author': None,
+    'authors': [],
+    'description': None,
     'rating': None,
     'pageCount': None,
     'ISBN': None,
     'genres': [],
-    'quotes': None
+    'quotes': []
 }
 
 quote_attributes = {
