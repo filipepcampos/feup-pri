@@ -50,6 +50,7 @@ def main():
 
     df = pd.read_json(input_file)
     df['nQuotes'] = df['quotes'].apply(lambda x: len(x))
+    df['author'] = df['authors'].apply(lambda x: x[0])
     df.describe().to_csv(f'{output_folder}/book_describe.csv')
 
     genre_df = get_genre_df(df)
