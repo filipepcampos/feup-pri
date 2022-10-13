@@ -8,6 +8,11 @@ convert those cases.
 def convert_isbn(json):
     if 'ISBN' in json:
         old_isbn = json['ISBN'][:-1]
+        try:
+            int(old_isbn)
+        except ValueError:
+            del json['ISBN']                # Remove outliers such as BO7FRW1CKJ
+            return json
         if len(old_isbn) == 9:              # ISBN-10
             new_isbn = "978" + old_isbn
             check = 38
@@ -19,6 +24,7 @@ def convert_isbn(json):
     return json
 
 def main():
+    #print(convert_isbn({"ISBN": "BO7FRW1CKJ"}))
     process_json(convert_isbn)
 
 if __name__ == '__main__':
