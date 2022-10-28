@@ -8,4 +8,4 @@ COPY schema.json /data/schema.json
 
 EXPOSE 8983
 
-ENTRYPOINT ["/scripts/startup.sh"]
+ENTRYPOINT /scripts/startup.sh
