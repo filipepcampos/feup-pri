@@ -20,7 +20,7 @@ IDENTIFY_QUOTE_LANGUAGE := 1
 DATA_OUTPUT_FOLDER := data
 
 # Output folder for process stage
-PROCESS_OUTPUT_FOLDER := processed
+PROCESS_OUTPUT_FOLDER := solr/data
 
 # Output folder for analyze stage
 ANALYSIS_OUTPUT_FOLDER := data/analysis
