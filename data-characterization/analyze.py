@@ -80,8 +80,7 @@ def main():
     plt.savefig(f'{output_folder}/rating_distribution.png')
 
     plt.clf()
-    sns.boxplot(author_df.rename(columns={'nBooks': 'Book Count', 'avgRating': 'Average Rating'}), showfliers=False)
-    plt.ylabel('Number of books')
+    sns.boxplot(author_df.rename(columns={'nBooks': 'Author\'s Book Count', 'avgRating': 'Author\'s Average Rating'}), showfliers=False)
     plt.ylim(0, 5)
     plt.tight_layout()
     savefig('book_rating_distribution.png')
