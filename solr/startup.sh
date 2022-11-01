@@ -8,9 +8,9 @@ solr start
 sleep 10
 
 # Schema definition via API
-#curl -X POST -H 'Content-type:application/json' \
-#    --data-binary @/data/simple_schema.json \
-#    http://localhost:8983/solr/courses/schema
+curl -X POST -H 'Content-type:application/json' \
+    --data-binary @/data/schema.json \
+    http://localhost:8983/solr/goodreads/schema
 
 # Populate collection
 bin/post -c goodreads /data/dataset.json

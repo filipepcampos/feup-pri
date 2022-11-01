@@ -1,14 +1,14 @@
 {
 	"add-field-type": [
         {
-            "name":"courseTitle",
+            "name":"textField",
             "class":"solr.TextField",
             "indexAnalyzer":{
                 "tokenizer":{
                     "class":"solr.StandardTokenizerFactory"
                 },
                 "filters":[
-                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":"true"},
                     {"class":"solr.LowerCaseFilterFactory"}
                 ]
             },
@@ -17,17 +17,80 @@
                     "class":"solr.StandardTokenizerFactory"
                 },
                 "filters":[
-                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":true},
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":"true"},
                     {"class":"solr.LowerCaseFilterFactory"}
                 ]
             }
+        },
+        {
+            "name":"integerField",
+            "class":"solr.IntPointField"
+        },
+        {
+            "name":"urlField",
+            "class":"solr.TextField"
         }
     ],
     "add-field": [
         {
             "name": "title",
-            "type": "courseTitle",
+            "type": "textField",
             "indexed": true
+        },
+        {
+            "name": "authors",
+            "type": "textField",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "rating",
+            "type": "integerField",
+            "indexed": false
+        },
+        {
+            "name": "pageCount",
+            "type": "integerField",
+            "indexed": false
+        },
+        {
+            "name": "ISBN",
+            "type": "textField",
+            "indexed": true
+        },
+        {
+            "name": "url",
+            "type": "urlField",
+            "indexed": false
+        },
+        {
+            "name": "description",
+            "type": "textField",
+            "indexed": true
+        },
+        {
+            "name": "genres",
+            "type": "textField",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "quotes.text",
+            "type": "textField",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "quotes.tags",
+            "type": "textField",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "quotes.likes",
+            "type": "integerField",
+            "indexed": false,
+            "multiValued": true
         }
     ]
 }
