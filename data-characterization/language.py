@@ -40,7 +40,7 @@ def main():
     plt.xlabel('Language')
     plt.ylabel('Quote Count')
     plt.tight_layout()
-    savefig('language_count.png')
+    savefig('language_count.pdf')
 
 if __name__ == '__main__':
     main()

@@ -77,13 +77,13 @@ def main():
 
     sns.displot(df, x="rating", bins=80, kde=True, kind='hist')
     plt.xlabel('Rating')
-    plt.savefig(f'{output_folder}/rating_distribution.png')
+    plt.savefig(f'{output_folder}/rating_distribution.pdf')
 
     plt.clf()
     sns.boxplot(author_df.rename(columns={'nBooks': 'Author\'s Book Count', 'avgRating': 'Author\'s Average Rating'}), showfliers=False)
     plt.ylim(0, 5)
     plt.tight_layout()
-    savefig('book_rating_distribution.png')
+    savefig('book_rating_distribution.pdf')
 
     plt.clf()
     sns.barplot(data=genre_df.reset_index().head(15), x='genre', y='count')
@@ -91,7 +91,7 @@ def main():
     plt.xlabel('Genre')
     plt.ylabel('Count')
     plt.tight_layout()
-    savefig('genre_count.png')
+    savefig('genre_count.pdf')
 
 
     plt.clf()
@@ -100,17 +100,17 @@ def main():
     plt.xlabel('Tag')
     plt.ylabel('Count')
     plt.tight_layout()
-    savefig('tag_count.png')
+    savefig('tag_count.pdf')
 
     plt.clf()
     sns.displot(data=genre_df, x='count', kind='hist')
-    savefig('complete_genre_count.png')
+    savefig('complete_genre_count.pdf')
 
     plt.clf()
     sns.lmplot(data=author_df, x='nBooks', y='avgRating', scatter_kws={'alpha':0.5, 's':0.8})
     plt.ylabel('Average rating')
     plt.xlabel('Number of books')
-    savefig('n_books_over_avgrating.png')
+    savefig('n_books_over_avgrating.pdf')
 
     def f(quotes):
         total, n = 0, 0
@@ -125,7 +125,7 @@ def main():
     plt.ylabel('Average Quote Likes')
     plt.xlabel('Rating')
     plt.tight_layout()
-    savefig('avgQuoteLikes_over_rating.png')
+    savefig('avgQuoteLikes_over_rating.pdf')
 
 
 if __name__ == '__main__':
