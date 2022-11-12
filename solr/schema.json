@@ -44,6 +44,11 @@
             "multiValued": true
         },
         {
+            "name": "authorsCount",
+            "type": "integerField",
+            "indexed": false
+        },
+        {
             "name": "rating",
             "type": "integerField",
             "indexed": false
@@ -73,6 +78,11 @@
             "type": "textField",
             "indexed": true,
             "multiValued": true
+        },
+        {
+            "name": "quotesCount",
+            "type": "integerField",
+            "indexed": false
         },
         {
             "name": "quotes.text",
