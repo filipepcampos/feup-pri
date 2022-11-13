@@ -101,6 +101,21 @@
             "type": "integerField",
             "indexed": false,
             "multiValued": true
+        },
+        {
+            "name": "genre1",
+            "type": "textField",
+            "indexed": "true"
+        },
+        {
+            "name": "genre2",
+            "type": "textField",
+            "indexed": "true"
+        },
+        {
+            "name": "genre3",
+            "type": "textField",
+            "indexed": "true"
         }
     ]
 }
