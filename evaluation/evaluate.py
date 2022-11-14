@@ -16,6 +16,7 @@ def get_args():
     parser.add_argument('qrels_file')
     parser.add_argument('query_url')
     parser.add_argument('output_dir')
+    parser.add_argument('-n', default=10, required=False)
     return parser.parse_args()
 
 args = get_args()
@@ -23,11 +24,16 @@ args = get_args()
 qrels_file = args.qrels_file
 query_url = args.query_url
 output_dir = args.output_dir
+n_documents = args.n
 
 # Read qrels to extract relevant documents
 relevant = list(map(lambda el: el.strip(), open(qrels_file).readlines()))
 # Get query results from Solr instance
 results = requests.get(query_url).json()['response']['docs']
+
+with open(f'{output_dir}/top_documents.txt', 'w') as file:
+    for doc in results[:n_documents]:
+        file.write(doc['title'] + '\n')
 
 # METRICS TABLE
 # Define custom decorator to automatically calculate metric based on key
@@ -67,16 +73,17 @@ evaluation_metrics = {
     'p10': 'Precision at 10 (P@10)'
 }
 
-# Calculate all metrics and export results as LaTeX table
-df = pd.DataFrame([['Metric','Value']] +
-    [
-        [evaluation_metrics[m], calculate_metric(m, results, relevant)]
-        for m in evaluation_metrics
-    ]
-)
-
+# Calculate all metrics 
+metrics_results = [
+    [evaluation_metrics[m], calculate_metric(m, results, relevant)]
+    for m in evaluation_metrics
+]
+# Export results as LaTeX table
+df = pd.DataFrame([['Metric','Value']] + metrics_results)
 with open(f'{output_dir}/results.tex','w') as tf:
-    tf.write(df.style.to_latex())
+    tf.write(df.style.hide(axis="index").to_latex())
+# Export to csv for internal use
+df.to_csv(f'{output_dir}/results.csv', header=False, index=False)
 
 # PRECISION-RECALL CURVE
 # Calculate precision and recall values as we move down the ranked list
