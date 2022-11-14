@@ -52,12 +52,18 @@ def p10(results, relevant, n=10):
     """Precision at N"""
     return len([doc for doc in results[:n] if doc['title'] in relevant])/n
 
+@metric
+def p5(results, relevant, n=5):
+    """Precision at N"""
+    return len([doc for doc in results[:n] if doc['title'] in relevant])/n
+
 def calculate_metric(key, results, relevant):
     return metrics[key](results, relevant)
 
 # Define metrics to be calculated
 evaluation_metrics = {
     'ap': 'Average Precision',
+    'p5': 'Precision at 5 (P@5)',
     'p10': 'Precision at 10 (P@10)'
 }
 
@@ -106,5 +112,8 @@ for idx, step in enumerate(recall_values):
             precision_recall_match[step] = precision_recall_match[recall_values[idx+1]]
 
 disp = PrecisionRecallDisplay([precision_recall_match.get(r) for r in recall_values], recall_values)
-disp.plot()
+ax = plt.gca()
+ax.set_xlim(0,1.1)
+ax.set_ylim(0,1.1)
+disp.plot(ax=ax)
 plt.savefig(f'{output_dir}/precision_recall.pdf')
