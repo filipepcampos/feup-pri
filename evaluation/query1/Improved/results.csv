@@ -1,0 +1,4 @@
+Metric,Value
+Average Precision,0.2888464709893282
+Precision at 5 (P@5),0.4
+Precision at 10 (P@10),0.3

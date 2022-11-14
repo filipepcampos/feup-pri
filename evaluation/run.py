@@ -8,6 +8,8 @@ with open('tasks.csv') as file:
 
 index = {}
 for (query_name, version_name, url) in lines:
+    if(query_name.startswith("#")):
+        continue
     Path(f'{query_name}/{version_name}').mkdir(parents=True, exist_ok=True)
     print(f'Evaluating {query_name}/{version_name}')
     process = subprocess.Popen(['python3', 'evaluate.py', f'{query_name}/relevant.txt', url, f'{query_name}/{version_name}'])
