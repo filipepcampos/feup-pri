@@ -15,7 +15,7 @@ for (query_name, version_name, url) in lines:
         continue
     Path(f'{query_name}/{version_name}').mkdir(parents=True, exist_ok=True)
     print(f'Evaluating {query_name}/{version_name}')
-    process = subprocess.Popen(['python3', 'evaluate.py', f'{query_name}/relevant.txt', url, f'{query_name}/{version_name}'])
+    process = subprocess.Popen(['python', 'evaluate.py', f'{query_name}/relevant.txt', url, f'{query_name}/{version_name}'])
     processes.append(process)
     index[query_name] = [version_name] if query_name not in index else index[query_name] + [version_name]
 
