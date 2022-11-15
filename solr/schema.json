@@ -46,7 +46,7 @@
         {
             "name": "authorsCount",
             "type": "integerField",
-            "indexed": false
+            "indexed": true
         },
         {
             "name": "rating",
@@ -56,7 +56,7 @@
         {
             "name": "pageCount",
             "type": "integerField",
-            "indexed": false
+            "indexed": true
         },
         {
             "name": "ISBN",
