@@ -4,7 +4,9 @@ import pandas as pd
 
 lines = []
 with open('tasks.csv') as file:
-    lines = [tuple(l.strip().split(',')) for l in file.readlines()]
+    for l in file.readlines():
+        split = l.strip().split(',')
+        lines.append((split[0], split[1], ",".join(split[2:])))
 
 index = {}
 for (query_name, version_name, url) in lines:

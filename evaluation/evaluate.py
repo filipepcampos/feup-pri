@@ -54,6 +54,16 @@ def ap(results, relevant):
     return sum(precision_values)/len(precision_values)
 
 @metric
+def p20(results, relevant, n=20):
+    """Precision at N"""
+    return len([doc for doc in results[:n] if doc['title'] in relevant])/n
+
+@metric
+def p15(results, relevant, n=15):
+    """Precision at N"""
+    return len([doc for doc in results[:n] if doc['title'] in relevant])/n
+
+@metric
 def p10(results, relevant, n=10):
     """Precision at N"""
     return len([doc for doc in results[:n] if doc['title'] in relevant])/n
@@ -70,7 +80,9 @@ def calculate_metric(key, results, relevant):
 evaluation_metrics = {
     'ap': 'Average Precision',
     'p5': 'Precision at 5 (P@5)',
-    'p10': 'Precision at 10 (P@10)'
+    'p10': 'Precision at 10 (P@10)',
+    'p15': 'Precision at 15 (P@15)',
+    'p20': 'Precision at 20 (P@20)',
 }
 
 # Calculate all metrics 
