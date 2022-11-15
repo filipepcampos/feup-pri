@@ -4,17 +4,23 @@ import pandas as pd
 
 lines = []
 with open('tasks.csv') as file:
-    lines = [tuple(l.strip().split(',')) for l in file.readlines()]
+    for l in file.readlines():
+        split = l.strip().split(',')
+        lines.append((split[0], split[1], ",".join(split[2:])))
 
 index = {}
+processes = []
 for (query_name, version_name, url) in lines:
     if(query_name.startswith("#")):
         continue
     Path(f'{query_name}/{version_name}').mkdir(parents=True, exist_ok=True)
     print(f'Evaluating {query_name}/{version_name}')
     process = subprocess.Popen(['python', 'evaluate.py', f'{query_name}/relevant.txt', url, f'{query_name}/{version_name}'])
-    process.wait()
+    processes.append(process)
     index[query_name] = [version_name] if query_name not in index else index[query_name] + [version_name]
+
+for p in processes:
+    p.wait()
 
 # Build comparisons
 for query_name, versions in index.items():

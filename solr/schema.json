@@ -82,7 +82,7 @@
         {
             "name": "quotesCount",
             "type": "integerField",
-            "indexed": false
+            "indexed": true
         },
         {
             "name": "quotes.text",
