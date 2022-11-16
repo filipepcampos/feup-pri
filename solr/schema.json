@@ -120,7 +120,7 @@
         {
             "name": "quotes.language.language",
             "type": "textField",
-            "indexed": "false",
+            "indexed": false,
             "multiValued": true
         },
         {
