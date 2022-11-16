@@ -31,7 +31,7 @@ for query_name, versions in index.items():
         df[version_name] = [l.strip() for l in open(f'{query_name}/{version_name}/top_documents.txt').readlines()]
     
     with open(f'{query_name}/top_documents.tex', 'w') as file:
-        file.write(df.style.hide(axis="index").to_latex())
+        file.write(df.T.style.hide(axis="columns").to_latex())
     
     # Metric comparison
     df = pd.read_csv(f'{query_name}/{versions[0]}/results.csv')
