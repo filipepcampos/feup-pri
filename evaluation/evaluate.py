@@ -33,7 +33,7 @@ results = requests.get(query_url).json()['response']['docs']
 
 with open(f'{output_dir}/top_documents.txt', 'w') as file:
     for doc in results[:n_documents]:
-        file.write(doc['title'] + '\n')
+        file.write(('R' if doc['title'] in relevant  else 'N')+ '\n')
 
 # METRICS TABLE
 # Define custom decorator to automatically calculate metric based on key
