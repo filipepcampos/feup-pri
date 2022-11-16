@@ -53,7 +53,7 @@ collect $(DATA_OUTPUT_FOLDER)/goodreads.json:
 			-o ../$(DATA_OUTPUT_FOLDER)/goodreads.json; \
 		deactivate
 
-process: $(DATA_OUTPUT_FOLDER)/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py data-processing/count_authors.py data-processing/count_quotes.py
+process: $(DATA_OUTPUT_FOLDER)/goodreads.json data-processing/convert_isbn.py data-processing/format_pages.py data-processing/format_quote_likes.py data-processing/remove_quoteless_books.py data-processing/strip_quotes.py data-processing/fill_missing_fields.py data-processing/count_authors.py data-processing/count_quotes.py data-processing/get_first_genres.py
 	# Apply data processing steps using some small python scripts
 	
 	mkdir -p $(PROCESS_OUTPUT_FOLDER)
@@ -66,7 +66,8 @@ process: $(DATA_OUTPUT_FOLDER)/goodreads.json data-processing/convert_isbn.py da
 		python3 data-processing/strip_quotes.py | \
 		python3 data-processing/fill_missing_fields.py | \
 		python3 data-processing/count_authors.py | \
-		python3 data-processing/count_quotes.py \
+		python3 data-processing/count_quotes.py | \
+		python3 data-processing/get_first_genres.py \
 		> $(PROCESS_OUTPUT_FOLDER)/goodreads.json
 
 	# The language identification step is time consuming, due to the large amount of quotes that need to be considered
