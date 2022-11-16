@@ -61,7 +61,7 @@
         {
             "name": "ISBN",
             "type": "textField",
-            "indexed": true
+            "indexed": false
         },
         {
             "name": "url",
@@ -105,17 +105,17 @@
         {
             "name": "genre1",
             "type": "textField",
-            "indexed": "true"
+            "indexed": true
         },
         {
             "name": "genre2",
             "type": "textField",
-            "indexed": "true"
+            "indexed": true
         },
         {
             "name": "genre3",
             "type": "textField",
-            "indexed": "true"
+            "indexed": true
         },
         {
             "name": "quotes.language.language",
@@ -126,7 +126,7 @@
         {
             "name": "quotes.language.score",
             "type": "integerField",
-            "indexed": "false",
+            "indexed": false,
             "multiValued": true
         }
     ]
