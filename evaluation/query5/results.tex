@@ -1,7 +1,10 @@
 \begin{tabular}{lrrrrr}
 Model & Average Precision & Precision at 5 (P@5) & Precision at 10 (P@10) & Precision at 15 (P@15) & Precision at 20 (P@20) \\
-Interesting comparison & 0.000000 & 0.000000 & 0.000000 & 0.000000 & 0.000000 \\
-Baseline & 0.625892 & 0.600000 & 0.600000 & 0.600000 & 0.500000 \\
-Improved v1 (without fiction genre) & 0.643957 & 0.600000 & 0.600000 & 0.600000 & 0.500000 \\
-Improved v2 (without fiction genre and space in quotes text) & 0.779825 & 0.800000 & 0.800000 & 0.666667 & 0.500000 \\
+Baseline & 0.000000 & 0.000000 & 0.000000 & 0.000000 & 0.000000 \\
+Improved v1 (PF^2 and QS=2) & 0.000000 & 0.000000 & 0.000000 & 0.000000 & 0.000000 \\
+Improved v2 (PF^2 PS=1 bq=none) & 0.000000 & 0.000000 & 0.000000 & 0.000000 & 0.000000 \\
+Improved v3 (PF^2 PS=1 boost=log(quotesCount)) & 0.000000 & 0.000000 & 0.000000 & 0.000000 & 0.000000 \\
+Improved v4 (PF^2 PS=1 boost=scale(log(quotesCount) 1.0 1.3)) & 0.000000 & 0.000000 & 0.000000 & 0.000000 & 0.000000 \\
+Improved v5 (PF^6 PS=1 boost=scale(log(quotesCount) 1.0 1.3)) & 0.000000 & 0.000000 & 0.000000 & 0.000000 & 0.000000 \\
+Improved v6 & 0.000000 & 0.000000 & 0.000000 & 0.000000 & 0.000000 \\
 \end{tabular}
