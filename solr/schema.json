@@ -116,6 +116,18 @@
             "name": "genre3",
             "type": "textField",
             "indexed": "true"
+        },
+        {
+            "name": "quotes.language.language",
+            "type": "textField",
+            "indexed": "false",
+            "multiValued": true
+        },
+        {
+            "name": "quotes.language.score",
+            "type": "integerField",
+            "indexed": "false",
+            "multiValued": true
         }
     ]
 }
