@@ -1,6 +1,4 @@
 Metric,Value
-Average Precision,0.07601155086462949
-Precision at 5 (P@5),0.2
-Precision at 10 (P@10),0.2
-Precision at 15 (P@15),0.2
-Precision at 20 (P@20),0.15
+AP,0.07601155086462949
+P@5,0.2
+P@10,0.2

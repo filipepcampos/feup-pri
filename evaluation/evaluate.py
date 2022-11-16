@@ -78,11 +78,9 @@ def calculate_metric(key, results, relevant):
 
 # Define metrics to be calculated
 evaluation_metrics = {
-    'ap': 'Average Precision',
-    'p5': 'Precision at 5 (P@5)',
-    'p10': 'Precision at 10 (P@10)',
-    'p15': 'Precision at 15 (P@15)',
-    'p20': 'Precision at 20 (P@20)',
+    'ap': 'AP',
+    'p5': 'P@5',
+    'p10': 'P@10'
 }
 
 # Calculate all metrics 
