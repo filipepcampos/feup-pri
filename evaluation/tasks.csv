@@ -9,6 +9,6 @@ query3,Enhanced C,http://localhost:8983/solr/goodreads/select?defType=edismax&fl
 query4,Baseline,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D&rows=20
 query4,Enhanced A,http://localhost:8983/solr/goodreads/select?q=genres:space%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D&rows=20
 query4,Enhanced B,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D%0Aquotes.text:space&rows=20
-query4,Enhanced C,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D%0Aquotes.text:space~1&rows=20
+query4,Enhanced C,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D%0Aquotes.text:space~3&rows=20
 query5,Baseline,http://127.0.0.1:8983/solr/goodreads/select?defType=dismax&fl=title%2Cauthors%2Crating%2CpageCount%2CISBN%2Cdescription%2Curl%2Cgenres%2Cscore%2Cquotes.text&indent=true&pf=quotes.text&q.op=OR&q=he%20asked%20calmly&qf=quotes.text&rows=15&start=0
 query5,Enhanced,http://127.0.0.1:8983/solr/goodreads/select?boost=scale(log(quotesCount)%2C%201.0%2C%201.3)&defType=edismax&fl=*&indent=true&pf=quotes.text%5E6&ps=1&q.op=OR&q=he%20asked%20calmly%5E1.1&qf=quotes.text&rows=15&start=0
