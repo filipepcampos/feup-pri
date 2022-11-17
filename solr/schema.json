@@ -23,30 +23,6 @@
             }
         },
         {
-            "name":"tagField",
-            "class":"solr.TextField",
-            "indexAnalyzer":{
-                "tokenizer":{
-                    "class":"solr.StandardTokenizerFactory"
-                },
-                "filters":[
-                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":"true"},
-                    {"class":"solr.LowerCaseFilterFactory"},
-                    {"class":"solr.SnowballPorterFilterFactory"}
-                ]
-            },
-            "queryAnalyzer":{
-                "tokenizer":{
-                    "class":"solr.StandardTokenizerFactory"
-                },
-                "filters":[
-                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":"true"},
-                    {"class":"solr.LowerCaseFilterFactory"},
-                    {"class":"solr.SnowballPorterFilterFactory"}
-                ]
-            }
-        },
-        {
             "name":"integerField",
             "class":"solr.IntPointField"
         },
@@ -116,7 +92,7 @@
         },
         {
             "name": "quotes.tags",
-            "type": "tagField",
+            "type": "textField",
             "indexed": true,
             "multiValued": true
         },
