@@ -79,7 +79,8 @@ ifeq ($(IDENTIFY_QUOTE_LANGUAGE), 1)
 	source data-processing/venv/bin/activate; \
 		pip install -r data-processing/requirements.txt --quiet; \
 		cat $(PROCESS_OUTPUT_FOLDER)/goodreads_nolanguage.json | \
-		python3 data-processing/identify_language.py \
+		python3 data-processing/identify_quotes_language.py | \
+		python3 data-processing/identify_description_language.py \
 		> $(PROCESS_OUTPUT_FOLDER)/goodreads.json
 	rm $(PROCESS_OUTPUT_FOLDER)/goodreads_nolanguage.json
 endif
