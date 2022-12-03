@@ -80,7 +80,8 @@ ifeq ($(IDENTIFY_QUOTE_LANGUAGE), 1)
 		pip install -r data-processing/requirements.txt --quiet; \
 		cat $(PROCESS_OUTPUT_FOLDER)/goodreads_nolanguage.json | \
 		python3 data-processing/identify_quotes_language.py | \
-		python3 data-processing/identify_description_language.py \
+		python3 data-processing/identify_description_language.py | \
+		python3 data-processing/group_quotes_language.py \
 		> $(PROCESS_OUTPUT_FOLDER)/goodreads.json
 	rm $(PROCESS_OUTPUT_FOLDER)/goodreads_nolanguage.json
 endif
@@ -90,17 +91,17 @@ analyze:
 
 	mkdir -p $(ANALYSIS_OUTPUT_FOLDER)
 
-	python3 -m venv data-characterization/venv
+	python3 -m venv data-analysis/venv
 
 ifeq ($(IDENTIFY_QUOTE_LANGUAGE), 1)
-	source data-characterization/venv/bin/activate; \
-		pip install -r data-characterization/requirements.txt --quiet; \
-		python3 data-characterization/analyze.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER);  \
-		python3 data-characterization/language.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER)
+	source data-analysis/venv/bin/activate; \
+		pip install -r data-analysis/requirements.txt --quiet; \
+		python3 data-analysis/analyze.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER);  \
+		python3 data-analysis/language.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER)
 else
-	source data-characterization/venv/bin/activate; \
-		pip install -r data-characterization/requirements.txt --quiet; \
-		python3 data-characterization/analyze.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER)
+	source data-analysis/venv/bin/activate; \
+		pip install -r data-analysis/requirements.txt --quiet; \
+		python3 data-analysis/analyze.py -i $(PROCESS_OUTPUT_FOLDER)/goodreads.json -o $(ANALYSIS_OUTPUT_FOLDER)
 endif
 
 adhoc:
