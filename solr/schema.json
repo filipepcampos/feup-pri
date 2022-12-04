@@ -1,34 +1,25 @@
 {
 	"add-field-type": [
         {
-            "name":"textField",
-            "class":"solr.TextField",
-            "indexAnalyzer":{
+            "name": "textField",
+            "class": "solr.TextField",
+            "analyzer":{
                 "tokenizer":{
-                    "class":"solr.StandardTokenizerFactory"
+                    "class": "solr.StandardTokenizerFactory"
                 },
                 "filters":[
-                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":"true"},
-                    {"class":"solr.LowerCaseFilterFactory"}
-                ]
-            },
-            "queryAnalyzer":{
-                "tokenizer":{
-                    "class":"solr.StandardTokenizerFactory"
-                },
-                "filters":[
-                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":"true"},
-                    {"class":"solr.LowerCaseFilterFactory"}
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal":"true"},
+                    {"class": "solr.LowerCaseFilterFactory"}
                 ]
             }
         },
         {
-            "name":"integerField",
-            "class":"solr.IntPointField"
+            "name": "intField",
+            "class": "solr.IntPointField"
         },
         {
-            "name":"urlField",
-            "class":"solr.TextField"
+            "name": "simpleTextField",
+            "class": "solr.TextField"
         }
     ],
     "add-field": [
@@ -44,90 +35,60 @@
             "multiValued": true
         },
         {
-            "name": "authorsCount",
-            "type": "integerField",
-            "indexed": true
-        },
-        {
             "name": "rating",
-            "type": "integerField",
+            "type": "intField",
             "indexed": false
         },
         {
-            "name": "pageCount",
-            "type": "integerField",
-            "indexed": true
-        },
-        {
             "name": "ISBN",
-            "type": "textField",
+            "type": "intField",
             "indexed": false
         },
         {
             "name": "url",
-            "type": "urlField",
+            "type": "simpleTextField",
             "indexed": false
-        },
-        {
-            "name": "description",
-            "type": "textField",
-            "indexed": true
         },
         {
             "name": "genres",
             "type": "textField",
             "indexed": true,
             "multiValued": true
-        },
+        }
+    ],
+    "add-dynamic-field": [
         {
-            "name": "quotesCount",
-            "type": "integerField",
+            "name": "*Count",
+            "type": "intField",
             "indexed": true
         },
         {
-            "name": "quotes.text",
+            "name": "description*",
+            "type": "textField",
+            "indexed": true
+        },
+        {
+            "name": "*.text",
             "type": "textField",
             "indexed": true,
             "multiValued": true
         },
         {
-            "name": "quotes.tags",
+            "name": "*.tags",
             "type": "textField",
             "indexed": true,
             "multiValued": true
         },
         {
-            "name": "quotes.likes",
-            "type": "integerField",
+            "name": "*.likes",
+            "type": "intField",
             "indexed": false,
             "multiValued": true
         },
         {
-            "name": "genre1",
+            "name": "genre*",
             "type": "textField",
             "indexed": true
-        },
-        {
-            "name": "genre2",
-            "type": "textField",
-            "indexed": true
-        },
-        {
-            "name": "genre3",
-            "type": "textField",
-            "indexed": true
-        },
-        {
-            "name": "quotes.language.language",
-            "type": "textField",
-            "indexed": false,
-            "multiValued": true
-        },
-        {
-            "name": "quotes.language.score",
-            "type": "integerField",
-            "indexed": false,
-            "multiValued": true
         }
     ]
 }
