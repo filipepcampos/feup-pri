@@ -114,7 +114,11 @@ recall_values = [
     for idx, _ in enumerate(results, start=1)
 ]
 
-precision_recall_match = {k: v for k,v in zip(recall_values, precision_values)}
+# precision_recall_match = {k: v for k,v in zip(recall_values, precision_values)}
+precision_recall_match = {}
+for i, recall in enumerate(recall_values):
+    precision = max(precision_values[i:])
+    precision_recall_match[recall] = precision
 
 # Extend recall_values to include traditional steps for a better curve (0.1, 0.2 ...)
 recall_values.extend([step for step in np.arange(0.1, 1.1, 0.1) if step not in recall_values])
