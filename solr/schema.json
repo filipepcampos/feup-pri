@@ -14,6 +14,216 @@
             }
         },
         {
+            "name": "textField_ca",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Catalan"}
+                ]
+            }
+        },
+        {
+            "name": "textField_da",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Danish"}
+                ]
+            }
+        },
+        {
+            "name": "textField_nl",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Dutch"}
+                ]
+            }
+        },
+        {
+            "name": "textField_en",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "English"}
+                ]
+            }
+        },
+        {
+            "name": "textField_fi",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Finnish"}
+                ]
+            }
+        },
+        {
+            "name": "textField_fr",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "French"}
+                ]
+            }
+        },
+        {
+            "name": "textField_de",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "German"}
+                ]
+            }
+        },
+        {
+            "name": "textField_hu",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Hungarian"}
+                ]
+            }
+        },
+        {
+            "name": "textField_it",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Italian"}
+                ]
+            }
+        },
+        {
+            "name": "textField_pt",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Portuguese"}
+                ]
+            }
+        },
+        {
+            "name": "textField_ro",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Romanian"}
+                ]
+            }
+        },
+        {
+            "name": "textField_ru",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Russian"}
+                ]
+            }
+        },
+        {
+            "name": "textField_es",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Spanish"}
+                ]
+            }
+        },
+        {
+            "name": "textField_sv",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Swedish"}
+                ]
+            }
+        },
+        {
+            "name": "textField_tr",
+            "class": "solr.TextField",
+            "analyzer":{
+                "tokenizer":{
+                    "class": "solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class": "solr.ASCIIFoldingFilterFactory", "preserveOriginal": "true"},
+                    {"class": "solr.LowerCaseFilterFactory"},
+                    {"class": "solr.SnowballPorterFilterFactory", "language": "Turkish"}
+                ]
+            }
+        },
+        {
             "name": "intField",
             "class": "solr.IntPointField"
         },
@@ -54,6 +264,11 @@
             "type": "textField",
             "indexed": true,
             "multiValued": true
+        },
+        {
+            "name": "wikipedia_description",
+            "type": "textField",
+            "indexed": true
         }
     ],
     "add-dynamic-field": [
@@ -61,23 +276,6 @@
             "name": "*Count",
             "type": "intField",
             "indexed": true
-        },
-        {
-            "name": "description*",
-            "type": "textField",
-            "indexed": true
-        },
-        {
-            "name": "*.text",
-            "type": "textField",
-            "indexed": true,
-            "multiValued": true
-        },
-        {
-            "name": "*.tags",
-            "type": "textField",
-            "indexed": true,
-            "multiValued": true
         },
         {
             "name": "*.likes",
@@ -89,6 +287,276 @@
             "name": "genre*",
             "type": "textField",
             "indexed": true
+        },
+        {
+            "name": "*_ca",
+            "type": "textField_ca",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_ca.text",
+            "type": "textField_ca",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_ca.tags",
+            "type": "textField_ca",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_da",
+            "type": "textField_da",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_da.text",
+            "type": "textField_da",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_da.tags",
+            "type": "textField_da",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_nl",
+            "type": "textField_nl",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_nl.text",
+            "type": "textField_nl",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_nl.tags",
+            "type": "textField_nl",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_en",
+            "type": "textField_en",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_en.text",
+            "type": "textField_en",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_en.tags",
+            "type": "textField_en",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_fi",
+            "type": "textField_fi",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_fi.text",
+            "type": "textField_fi",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_fi.tags",
+            "type": "textField_fi",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_fr",
+            "type": "textField_fr",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_fr.text",
+            "type": "textField_fr",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_fr.tags",
+            "type": "textField_fr",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_de",
+            "type": "textField_de",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_de.text",
+            "type": "textField_de",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_de.tags",
+            "type": "textField_de",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_hu",
+            "type": "textField_hu",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_hu.text",
+            "type": "textField_hu",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_hu.tags",
+            "type": "textField_hu",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_it",
+            "type": "textField_it",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_it.text",
+            "type": "textField_it",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_it.tags",
+            "type": "textField_it",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_pt",
+            "type": "textField_pt",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_pt.text",
+            "type": "textField_pt",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_pt.tags",
+            "type": "textField_pt",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_ro",
+            "type": "textField_ro",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_ro.text",
+            "type": "textField_ro",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_ro.tags",
+            "type": "textField_ro",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_ru",
+            "type": "textField_ru",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_ru.text",
+            "type": "textField_ru",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_ru.tags",
+            "type": "textField_ru",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_es",
+            "type": "textField_es",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_es.text",
+            "type": "textField_es",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_es.tags",
+            "type": "textField_es",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_sv",
+            "type": "textField_sv",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_sv.text",
+            "type": "textField_sv",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_sv.tags",
+            "type": "textField_sv",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_tr",
+            "type": "textField_tr",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_tr.text",
+            "type": "textField_tr",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "*_tr.tags",
+            "type": "textField_tr",
+            "indexed": true,
+            "multiValued": true
         }
     ]
 }
