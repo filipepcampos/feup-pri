@@ -1,0 +1,133 @@
+{
+	"add-field-type": [
+        {
+            "name":"textField",
+            "class":"solr.TextField",
+            "indexAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":"true"},
+                    {"class":"solr.LowerCaseFilterFactory"}
+                ]
+            },
+            "queryAnalyzer":{
+                "tokenizer":{
+                    "class":"solr.StandardTokenizerFactory"
+                },
+                "filters":[
+                    {"class":"solr.ASCIIFoldingFilterFactory", "preserveOriginal":"true"},
+                    {"class":"solr.LowerCaseFilterFactory"}
+                ]
+            }
+        },
+        {
+            "name":"integerField",
+            "class":"solr.IntPointField"
+        },
+        {
+            "name":"urlField",
+            "class":"solr.TextField"
+        }
+    ],
+    "add-field": [
+        {
+            "name": "title",
+            "type": "textField",
+            "indexed": true
+        },
+        {
+            "name": "authors",
+            "type": "textField",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "authorsCount",
+            "type": "integerField",
+            "indexed": true
+        },
+        {
+            "name": "rating",
+            "type": "integerField",
+            "indexed": false
+        },
+        {
+            "name": "pageCount",
+            "type": "integerField",
+            "indexed": true
+        },
+        {
+            "name": "ISBN",
+            "type": "textField",
+            "indexed": false
+        },
+        {
+            "name": "url",
+            "type": "urlField",
+            "indexed": false
+        },
+        {
+            "name": "description",
+            "type": "textField",
+            "indexed": true
+        },
+        {
+            "name": "genres",
+            "type": "textField",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "quotesCount",
+            "type": "integerField",
+            "indexed": true
+        },
+        {
+            "name": "quotes.text",
+            "type": "textField",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "quotes.tags",
+            "type": "textField",
+            "indexed": true,
+            "multiValued": true
+        },
+        {
+            "name": "quotes.likes",
+            "type": "integerField",
+            "indexed": false,
+            "multiValued": true
+        },
+        {
+            "name": "genre1",
+            "type": "textField",
+            "indexed": true
+        },
+        {
+            "name": "genre2",
+            "type": "textField",
+            "indexed": true
+        },
+        {
+            "name": "genre3",
+            "type": "textField",
+            "indexed": true
+        },
+        {
+            "name": "quotes.language.language",
+            "type": "textField",
+            "indexed": false,
+            "multiValued": true
+        },
+        {
+            "name": "quotes.language.score",
+            "type": "integerField",
+            "indexed": false,
+            "multiValued": true
+        }
+    ]
+}
