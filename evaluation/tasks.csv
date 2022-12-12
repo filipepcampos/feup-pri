@@ -1,13 +1,13 @@
-# query1,Baseline,http://127.0.0.1:8983/solr/goodreads/select?q.op=OR&q=title%3Aphilosophy%0Agenres%3Aphilosophy%0Aquotes.text%3Aphilosophy%0Aquotes.tags%3Aphilosophy&rows=20&start=0
-# query3,Baseline,http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&fl=title%2Cauthors%2Crating%2CpageCount%2CISBN%2Cdescription%2Curl%2Cgenres%2Cscore&indent=true&q.op=OR&q=epic%20fantasy%0Aauthors%3A%22Stephen%20King%22&qf=description%20genres%20quotes.tags&rows=400
-# query3,Enhanced A,http://localhost:8983/solr/goodreads/select?defType=edismax&fl=*&indent=true&q.op=OR&q=epic%20fantasy%0Aauthors%3A%22Stephen%20King%22%5E20%20%0Agenres%3A(epic%20fantasy)%5E10&qf=description%20quotes.tags&rows=60
-# query3,Enhanced B,http://localhost:8983/solr/goodreads/select?defType=edismax&fl=*&indent=true&q.op=OR&q=authors%3A%22Stephen%20King%22%5E15%0Agenre1%3Afantasy%5E30&rows=13
-# query4,Baseline,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D&rows=20
-# query4,Enhanced A,http://localhost:8983/solr/goodreads/select?q=genres:space%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D&rows=20
-# query4,Enhanced B,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D%0Aquotes.text:space&rows=20
+# query1,Baseline,http://127.0.0.1:8983/solr/goodreads/select?q.op=OR&q=title%3Aphilosophy%0Agenres%3Aphilosophy%0Aquotes.text%3Aphilosophy%0Aquotes.tags%3Aphilosophy&rows=10&start=0
+# query3,Baseline,http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&fl=title%2Cauthors%2Crating%2CpageCount%2CISBN%2Cdescription%2Curl%2Cgenres%2Cscore&indent=true&q.op=OR&q=epic%20fantasy%0Aauthors%3A%22Stephen%20King%22&qf=description%20genres%20quotes.tags&rows=10
+# query3,Enhanced A,http://localhost:8983/solr/goodreads/select?defType=edismax&fl=*&indent=true&q.op=OR&q=epic%20fantasy%0Aauthors%3A%22Stephen%20King%22%5E20%20%0Agenres%3A(epic%20fantasy)%5E10&qf=description%20quotes.tags&rows=10
+# query3,Enhanced B,http://localhost:8983/solr/goodreads/select?defType=edismax&fl=*&indent=true&q.op=OR&q=authors%3A%22Stephen%20King%22%5E15%0Agenre1%3Afantasy%5E30&rows=10
+# query4,Baseline,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D&rows=10
+# query4,Enhanced A,http://localhost:8983/solr/goodreads/select?q=genres:space%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D&rows=10
+# query4,Enhanced B,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D%0Aquotes.text:space&rows=10
 # query5,Baseline,http://127.0.0.1:8983/solr/goodreads/select?defType=dismax&fl=title%2Cauthors%2Crating%2CpageCount%2CISBN%2Cdescription%2Curl%2Cgenres%2Cscore%2Cquotes.text&indent=true&pf=quotes.text&q.op=OR&q=he%20asked%20calmly&qf=quotes.text&rows=15&start=0
 # query5,Enhanced,http://127.0.0.1:8983/solr/goodreads/select?boost=scale(log(quotesCount)%2C%201.0%2C%201.3)&defType=edismax&fl=title&indent=true&pf=quotes.text%5E6&ps=1&q.op=OR&q=he%20asked%20calmly&qf=quotes.text&rows=15&start=0
-# query1,Enhanced,http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&q.op=OR&q=philosophy%0Aquotes_en.tags%3Aphilosophy~2&qf=title%20description_en%20genres%20quotes_en.text&rows=20
-query2,Baseline,http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&q.op=OR&q=-genres%3Aphilosophy%0Aquotes_en.tags%3Aphilosophy&rows=20
-# query3,Enhanced C,http://localhost:8983/solr/goodreads/select?defType=edismax&q.op=OR&q=epic%20fantasy%0Aauthors%3A%22Stephen%20King%22%5E15%0Agenre1%3Afantasy%5E30%0Agenre2%3Afantasy%5E10%0Agenre3%3Afantasy%5E2&qf=description_en%20quotes_en.tags%20genres&rows=20
-# query4,Enhanced C,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D%0Aquotes_en.text:space~3&rows=20
+query1,Enhanced,http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&q.op=OR&q=philosophy%0Aquotes_en.tags%3Aphilosophy~2&qf=title%20description_en%20wikipedia_description%20genres%20quotes_en.text&rows=10
+query2,Baseline,http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&q.op=OR&q=-genres%3Aphilosophy%0Aquotes_en.tags%3Aphilosophy&rows=10
+query3,Enhanced C,http://localhost:8983/solr/goodreads/select?defType=edismax&q.op=OR&q=epic%20fantasy%0Aauthors%3A%22Stephen%20King%22%5E15%0Agenre1%3Afantasy%5E30%0Agenre2%3Afantasy%5E10%0Agenre3%3Afantasy%5E2&qf=description_en%20wikipedia_description%20quotes_en.tags%20genres&rows=10
+query4,Enhanced C,http://localhost:8983/solr/goodreads/select?q=genres:space,nonfiction%0A-genres:fiction%0AauthorsCount:1%0ApageCount:%5B200%20TO%20*%5D%0Aquotes_en.text:space~3&rows=10
