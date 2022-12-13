@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 
 lines = []
-with open('tasks.csv') as file:
+with open('tasks_milestone02.csv') as file: # Change it when needed
     for l in file.readlines():
         split = l.strip().split(',')
         lines.append((split[0], split[1], ",".join(split[2:])))

@@ -43,15 +43,11 @@ metric = lambda f: metrics.setdefault(f.__name__, f)
 @metric
 def ap(results, relevant):
     """Average Precision"""
-    precision_values = [
-        len([
-            doc 
-            for doc in results[:idx]
-            if doc['title'] in relevant
-        ]) / idx 
-        for idx in range(1, len(results))
-    ]
-    return sum(precision_values)/len(precision_values)
+    precision_values = []
+    for idx, doc in enumerate(results, start=1):
+        if doc['title'] in relevant:
+            precision_values.append(len([doc for doc in results[:idx] if doc['title'] in relevant]) / idx)
+    return sum(precision_values) / len(precision_values)
 
 @metric
 def p20(results, relevant, n=20):
