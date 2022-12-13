@@ -1,10 +1,10 @@
 FROM solr:8.10
 
-COPY data/goodreads.json /data/dataset.json
+COPY data/goodreads_milestone02.json /data/dataset.json
 
 COPY startup.sh /scripts/startup.sh
 
-COPY schema.json /data/schema.json
+COPY schema_milestone02.json /data/schema.json
 
 EXPOSE 8983
 
