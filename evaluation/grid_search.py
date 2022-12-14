@@ -1,0 +1,81 @@
+from sklearn.model_selection import ParameterGrid
+import requests
+from tqdm import tqdm
+
+
+tasks = [
+    ("query1", "http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&indent=true&q.op=OR&q=philosophy%0Aquotes.tags%3Aphilosophy~2%0Aquotes.text%3Aphilosophy"),
+    ("query2", "http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&indent=true&q.op=OR&q=-genres%3Aphilosophy%0Aquotes.tags%3Aphilosophy"),
+    ("query3", "http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&indent=true&q.op=OR&q=epic%20fantasy%0Aauthors%3A%22Stephen%20King%22%5E15%0Agenre1%3Afantasy%5E30%0Agenre2%3Afantasy%5E10%0Agenre3%3Afantasy%5E2"),
+    ("query4", "http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&indent=true&q.op=OR&q=genres%3Aspace%2Cnonfiction%0A-genres%3Afiction%0AauthorsCount%3A1%0ApageCount%3A%5B200%20TO%20*%5D%0Aquotes.text%3Aspace~3"),
+]
+
+MIN_VAL = 1
+MAX_VAL = 5
+
+param_grid = {
+    "title": [i for i in range(1, 10)],
+    "authors": [i for i in range(MIN_VAL, MAX_VAL)],
+    "description": [i for i in range(MIN_VAL, MAX_VAL)],
+    "genre1": [i for i in range(MIN_VAL, MAX_VAL)],
+    # "genre2": [round(i, 1) for i in np.arange(0.1, 5.5, 0.5)],
+    # "genre3": [round(i, 1) for i in np.arange(0.1, 5.5, 0.5)],
+    "quotes.text": [i for i in range(MIN_VAL, MAX_VAL)],
+    "quotes.tags": [i for i in range(MIN_VAL, MAX_VAL)],
+}
+
+def ap(results, relevant):
+    """Average Precision"""
+    precision_values = []
+    for idx, doc in enumerate(results, start=1):
+        if doc['title'] in relevant:
+            precision_values.append(len([doc for doc in results[:idx] if doc['title'] in relevant]) / idx)
+    return sum(precision_values) / len(precision_values)
+
+def p10(results, relevant, n=10):
+    """Precision at N"""
+    return len([doc for doc in results[:n] if doc['title'] in relevant])/n
+
+param_grid = ParameterGrid(param_grid)
+
+metric_dict = {} # Keys: [parameter_index][query_name] = AvP
+
+with tqdm(total=len(param_grid)*len(tasks)) as pbar:
+    for query_name, url in tasks:
+        qrels_file = f"{query_name}/relevant.txt"
+
+        # Read qrels to extract relevant documents
+        relevant = list(map(lambda el: el.strip(), open(qrels_file).readlines()))
+        
+        task_ap_list = []
+        for i, p in enumerate(param_grid):
+            qf = f"qf=title%5E{p['title']}%20authors%5E{p['authors']}%20description%5E{p['description']}%20genre1%5E{p['genre1']}%20genre2%5E2%20genre3%5E1.5%20quotes.text%5E{p['quotes.text']}%20quotes.tags%5E{p['quotes.tags']}&rows=10"
+            query_url = f"{url}&{qf}&fl=title"
+
+            # Get query results from Solr instance
+            results = requests.get(query_url).json()['response']['docs']
+            
+            metric_dict[i] = metric_dict.get(i, {})
+            #metric_dict[i][query_name] = ap(results, relevant)
+            metric_dict[i][query_name] = p10(results, relevant)
+            pbar.update(1)
+
+
+max_mAP = 0
+best_params_index = -1
+for i in range(len(param_grid)):
+    mAP = 0
+    for query_name, _ in tasks:
+        mAP += metric_dict[i][query_name]
+    mAP /= len(tasks)
+
+    if mAP > max_mAP:
+        max_mAP = mAP
+        best_params_index = i
+
+print(param_grid[best_params_index], f"mAP: {max_mAP}", metric_dict[best_params_index])
+
+p = param_grid[best_params_index]
+qf = f"qf=title%5E{p['title']}%20authors%5E{p['authors']}%20description%5E{p['description']}%20genre1%5E{p['genre1']}%20genre2%5E2%20genre3%5E1.5%20quotes.text%5E{p['quotes.text']}%20quotes.tags%5E{p['quotes.tags']}&rows=10"
+for query_name, url in tasks:
+    print(f"{query_name},GridSearch,{url}&{qf}")
