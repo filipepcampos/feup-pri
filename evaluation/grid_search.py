@@ -19,7 +19,7 @@ tasks = [
 # &qf=title%5E2%20authors%5E1%20%20genre1%5E2%20genre2%5E2%20genre3%5E1.5%20wikipedia_description&rows=10"
 
 MIN_VAL = 1
-MAX_VAL = 10
+MAX_VAL = 5
 
 # Tasks 2
 # param_grid = {
@@ -48,7 +48,9 @@ def ap(results, relevant):
     for idx, doc in enumerate(results, start=1):
         if doc['title'] in relevant:
             precision_values.append(len([doc for doc in results[:idx] if doc['title'] in relevant]) / idx)
-    return sum(precision_values) / len(precision_values)
+    if len(precision_values) > 0:
+        return sum(precision_values) / len(precision_values)
+    return 0
 
 def p10(results, relevant, n=10):
     """Precision at N"""
@@ -56,7 +58,8 @@ def p10(results, relevant, n=10):
 
 param_grid = ParameterGrid(param_grid)
 
-metric_dict = {} # Keys: [parameter_index][query_name] = AvP
+p10_dict = {} # Keys: [parameter_index][query_name] = P@10
+avp_dict = {}
 
 with tqdm(total=len(param_grid)*len(tasks)) as pbar:
     for query_name, url in tasks:
@@ -74,25 +77,36 @@ with tqdm(total=len(param_grid)*len(tasks)) as pbar:
             # Get query results from Solr instance
             results = requests.get(query_url).json()['response']['docs']
             
-            metric_dict[i] = metric_dict.get(i, {})
-            #metric_dict[i][query_name] = ap(results, relevant)
-            metric_dict[i][query_name] = p10(results, relevant)
+            p10_dict[i] = p10_dict.get(i, {})
+            p10_dict[i][query_name] = (p10(results, relevant)
+            avp_dict[i] = avp_dict.get(i, {})
+            avp_dict[i][query_name] = ap(results, relevant)
             pbar.update(1)
 
 
+max_p10 = 0
 max_mAP = 0
 best_params_index = -1
 for i in range(len(param_grid)):
+    mP10 = 0
     mAP = 0
     for query_name, _ in tasks:
-        mAP += metric_dict[i][query_name]
+        mP10 += p10_dict[i][query_name]
+        mAP += avp_dict[i][query_name]
+    mP10 /= len(tasks)
     mAP /= len(tasks)
 
-    if mAP > max_mAP:
+    if mP10 > max_p10:
+        max_p10 = mP10
         max_mAP = mAP
         best_params_index = i
+    elif mP10 == max_p10:
+        if mAP > max_mAP:
+            max_p10 = mP10
+            max_mAP = mAP
+            best_params_index = i
 
-print(param_grid[best_params_index], f"mAP: {max_mAP}", metric_dict[best_params_index])
+print(param_grid[best_params_index], "ap", avp_dict[best_params_index], " p@10", p10_dict[best_params_index])
 
 p = param_grid[best_params_index]
 # qf = f"qf=title%5E{p['title']}%20authors%5E{p['authors']}%20description%5E{p['description']}%20genre1%5E{p['genre1']}%20genre2%5E2%20genre3%5E1.5%20quotes.text%5E{p['quotes.text']}%20quotes.tags%5E{p['quotes.tags']}&rows=10"
