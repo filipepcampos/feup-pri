@@ -9,7 +9,7 @@ def get_pr(filename):
         return precision, recall
 
 
-def plot_comparison(filename1, filename2, output_filename="pr.pdf", label1="System 1", label2="System 2"):
+def plot_comparison(filename1, filename2, output_filename="pr.pdf", label1="System A", label2="System B"):
     pA, rA = get_pr(filename1)
     pB, rB = get_pr(filename2)
 
