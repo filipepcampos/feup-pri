@@ -13,7 +13,7 @@ tasks = [
     ("query1", "http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&indent=true&q.op=OR&q=philosophy%0Aquotes_en.text%3Aphilosophy%0Aquotes_en.tags%3Aphilosophy~2%0Adescription_en%3Aphilosophy"),
     ("query2", "http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&indent=true&q.op=OR&q=-genres%3Aphilosophy%0Aquotes_en.tags%3Aphilosophy"),
     ("query3", "http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&indent=true&q.op=OR&q=epic%20fantasy%0Adescription_en%3Aepic%20fantasy%0Aquotes_en.tags%3Aepic%20fantasy%0Aauthors%3A%22Stephen%20King%22%5E15%0Agenre1%3Afantasy%5E30%0Agenre2%3Afantasy%5E10%0Agenre3%3Afantasy%5E2"),
-    ("query4", "http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&indent=true&q.op=OR&q=space%20nonfiction%0A-genres%3Afiction%0AauthorsCount%3A1%0ApageCount%3A%5B200%20TO%20*%5D%0Aquotes_en.text%3Aspace"),
+    ("query4", "http://127.0.0.1:8983/solr/goodreads/select?defType=edismax&fl=title%2C%20description_en%2C%20wikipedia_description&indent=true&q.op=OR&q=space%20nonfiction%0A-genres%3Afiction%5E3%0Agenres%3Aspace%5E5%0Agenres%3Anonfiction%5E2%0AauthorsCount%3A1%0ApageCount%3A%5B200%20TO%20*%5D%0Aquotes_en.text%3Aspace%5E5"),
 ]
 
 # &qf=title%5E2%20authors%5E1%20%20genre1%5E2%20genre2%5E2%20genre3%5E1.5%20wikipedia_description&rows=10"
