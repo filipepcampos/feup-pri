@@ -128,6 +128,11 @@ for idx, step in enumerate(recall_values):
         else:
             precision_recall_match[step] = precision_recall_match[recall_values[idx+1]]
 
+with open(f'{output_dir}/precision_recall_values.csv', 'w') as file:
+    file.write(','.join([str(precision_recall_match.get(r)) for r in recall_values]))
+    file.write('\n')
+    file.write(','.join(str(i) for i in recall_values))
+
 disp = PrecisionRecallDisplay([precision_recall_match.get(r) for r in recall_values], recall_values)
 ax = plt.gca()
 ax.set_xlim(0,1.1)
